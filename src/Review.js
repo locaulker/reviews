@@ -12,6 +12,10 @@ const Review = () => {
    */
   const { name, job, image, text } = people[index] //
 
+  /**
+   *  Prevent errors by clicking the prev button to before the first element
+   *  Prevent errors by clicking the next button to after the last element
+   */
   const checkNumber = number => {
     if (number > people.length - 1) {
       return 0
@@ -38,6 +42,16 @@ const Review = () => {
     })
   }
 
+  // based on the Math.random() function
+  const randomPerson = () => {
+    let randomNumber = Math.floor(Math.random() * people.length)
+    if (randomNumber === index) {
+      randomNumber = index + 1
+    }
+    console.log(randomNumber)
+    setIndex(checkNumber(randomNumber))
+  }
+
   return (
     <article className="review">
       <div className="img-container">
@@ -57,7 +71,9 @@ const Review = () => {
           <FaChevronRight />
         </button>
       </div>
-      <button className="random-btn">surprise Me!</button>
+      <button className="random-btn" onClick={randomPerson}>
+        surprise Me!
+      </button>
     </article>
   )
 }
